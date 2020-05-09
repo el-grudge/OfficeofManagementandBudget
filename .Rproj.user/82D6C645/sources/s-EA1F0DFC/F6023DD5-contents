@@ -1,0 +1,19 @@
+library(tidyverse)
+library(readxl)
+data <- read.csv("budgets.csv")
+df <- data.frame(data)
+
+df_grp <- df
+df_grp <- df_grp %>% select(-programs, -X2019, -X2020) %>% gather(key = year, value = amount, X2021,X2022,X2023,X2024,X2025,X2026,X2027,X2028,X2029,X2030)
+
+for(i in 1:length(unique(df_grp$year))){
+  df_grp$year[df_grp$year == unique(df_grp$year)[i]] = substring(unique(df_grp$year)[i], 2)
+}
+
+df_grp %>% 
+  ggplot(aes(year, amount)) +
+  geom_bar(aes(fill = category, color = category), stat = "identity", position = "dodge") + 
+  theme(legend.position="top") + 
+  labs(subtitle="Budget Spending between from 2021 to 2030", 
+       title= "Group Bar Chart")
+

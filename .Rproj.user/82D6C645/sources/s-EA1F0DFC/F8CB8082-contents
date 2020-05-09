@@ -1,0 +1,25 @@
+library(tidyverse)
+library(readxl)
+data <- read.csv("budgets.csv")
+df <- data.frame(data)
+View(df)
+df_2021dev <- select(df, category, X2020, X2021)
+View(df_2021dev)
+df_2021dev1 <- df_2021dev
+df_2021dev1$dev <- (df_2021dev1$X2021-df_2021dev1$X2020) / df_2021dev1$X2020
+View(df_2021dev1)
+df_2021dev2 <- df_2021dev1
+df_2021dev2$devz <- round((df_2021dev2$dev - mean(df_2021dev2$dev)) / sd(df_2021dev2$dev),2)
+View(df_2021dev2)
+df_2021dev3 <- df_2021dev2
+df_2021dev3$thresh <- ifelse(df_2021dev3$devz > 0, "above", "below")
+View(df_2021dev3)
+df_2021dev4 <- df_2021dev3
+df_2021dev4 <- df_2021dev4[order(df_2021dev4$devz),]
+View(df_2021dev4)
+df_2021dev5 <- df_2021dev4
+View(df_2021dev5)
+df_2021dev6 <- df_2021dev5
+df_2021dev6$category <- factor(df_2021dev6$category, levels = df_2021dev6$category)
+View(df_2021dev6)
+

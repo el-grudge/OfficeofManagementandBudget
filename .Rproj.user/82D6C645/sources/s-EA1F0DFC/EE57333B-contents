@@ -1,0 +1,62 @@
+# bar chart comparison - ordered
+df_1a %>% 
+  arrange(Country.Region) %>% 
+  mutate(Count.millions = as.numeric(factor(Count.millions, levels = .$Count.millions))) %>%
+  ggplot(aes(Year, Count.millions, fill = Country.Region, color = Country.Region)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  facet_grid(vars(Indicator))
+
+
+ggplot(df_2021dev, aes(x=category, y=devz, label=devz)) + 
+  geom_bar(stat='identity', aes(fill=df_2021dev$thresh), width=.5)  +
+  scale_fill_manual(name="Budget Deviation", 
+                    labels = c("Above Average", "Below Average"), 
+                    values = c("above"="#00ba38", "below"="#f8766d")) + 
+  labs(subtitle="Budget Deviation between years 2020 & 2021", 
+       title= "Diverging Bar Chart") + 
+  coord_flip()
+
+
+df_sample <- select(df, category, X2020, X2021) %>% gather(key = year, value = amount, X2020, X2021)
+
+df_sample$year[df_sample$year == 'X2020'] = 2020
+
+length(df_sample$year %>% unique())
+
+for(i in 1:length(unique(df_sample$year))){
+  df_sample$year[df_sample$year == unique(df_sample$year)[i]] = substring(unique(df_sample$year)[i], 2)
+}
+
+unique(df_sample$year)[1]
+
+df_tst <- df
+
+c <- colnames(df_tst)[5:length(colnames(df_tst))]
+
+###
+df_tst <- df_tst %>% select(-programs, -X2019, -X2020) %>% gather(key = year, value = amount, X2021,X2022,X2023,X2024,X2025,X2026,X2027,X2028,X2029,X2030)
+
+for(i in 1:length(unique(df_tst$year))){
+  df_tst$year[df_tst$year == unique(df_tst$year)[i]] = substring(unique(df_tst$year)[i], 2)
+}
+
+df_tst %>% 
+  #arrange(Country.Region) %>% 
+  #mutate(Count.millions = as.numeric(factor(Count.millions, levels = .$Count.millions))) %>%
+  ggplot(aes(year, amount)) +
+  geom_bar(aes(fill = category, color = category), stat = "identity", position = "dodge") #+
+  #facet_grid(vars(Indicator))
+
+
+df_grp %>% 
+  ggplot(aes(as.numeric(factor(df_grp$year)), amount)) +
+  geom_bar(aes(fill = category, color = category), stat = "identity", position = "dodge") + 
+  theme(legend.position="top") + 
+  labs(subtitle="Budget Spending between from 2021 to 2030", 
+       title= "Group Bar Chart") + scale_x_continuous(limits = c(2021, 2030))
+
+?scale_x_continuous
+
+factor(df_grp$year)
+
+factor(Count.millions, levels = .$Count.millions)

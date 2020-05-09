@@ -1,0 +1,33 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1583263131752.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "676CA189",
+    "lastKnownWriteTime" : 1581912660,
+    "last_content_update" : 1583263131752,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "44569A6D",
+        "caption" : "df_2021dev6",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=df_2021dev6&cache_key=44569A6D",
+        "displayedObservations" : 6,
+        "environment" : "",
+        "expression" : "df_2021dev6",
+        "object" : "df_2021dev6",
+        "preview" : 0,
+        "totalObservations" : 6,
+        "variables" : 6
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 13,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}
